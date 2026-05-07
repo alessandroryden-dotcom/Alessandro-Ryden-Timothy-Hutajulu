@@ -3,230 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BANIAR GROUP | Advanced Systems & Bio-Science</title>
+    <title>BANIAR GROUP | Command Terminal</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-deep: #020202;
+            --bg-dark: #020202;
             --accent-red: #ff0000;
-            --accent-blue: #00d4ff;
-            --panel-bg: rgba(15, 15, 15, 0.95);
-            --text-main: #e0e0e0;
+            --ui-gold: #c5a059;
+            --terminal-green: #00ff41;
+            --glass-bg: rgba(10, 10, 10, 0.9);
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            color: #ffffff;
             font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #020202 100%);
+            /* Efek Grid Futuristik */
+            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                              linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 4px, 3px 100%;
         }
 
-        h1, h2, h3, .nav-link { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+        h1, h2, h3, .nav-link { font-family: 'Orbitron', sans-serif; letter-spacing: 2px; }
 
-        /* --- Scanline Effect --- */
-        body::before {
-            content: " ";
-            position: fixed; top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 9999; background-size: 100% 4px, 3px 100%; pointer-events: none;
-        }
-
-        /* --- Navigation --- */
+        /* --- Custom Navbar --- */
         .navbar {
-            border-bottom: 1px solid var(--accent-red);
-            background: rgba(0,0,0,0.8) !important;
-            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.9) !important;
+            border-bottom: 2px solid var(--accent-red);
+            padding: 1rem 0;
         }
 
-        .nav-link { color: #fff !important; font-size: 0.9rem; transition: 0.3s; cursor: pointer; }
+        .nav-link { 
+            color: #fff !important; 
+            cursor: pointer; 
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
         .nav-link:hover { color: var(--accent-red) !important; text-shadow: 0 0 10px var(--accent-red); }
 
-        /* --- Main Content Transition --- */
-        #main-display {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 0;
+        /* --- Content Display Area --- */
+        #display-master {
+            min-height: 85vh;
+            padding-top: 120px;
+            padding-bottom: 50px;
         }
 
         .content-card {
-            background: var(--panel-bg);
+            background: var(--glass-bg);
             border: 1px solid #333;
-            padding: 40px;
             border-left: 5px solid var(--accent-red);
-            animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            box-shadow: 0 0 50px rgba(255,0,0,0.1);
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.1);
+            /* Animasi Muncul */
+            animation: glitchOpen 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(50px); filter: blur(10px); }
-            to { opacity: 1; transform: translateX(0); filter: blur(0); }
+        @keyframes glitchOpen {
+            0% { transform: translateY(20px); opacity: 0; filter: blur(5px); }
+            100% { transform: translateY(0); opacity: 1; filter: blur(0); }
         }
 
-        /* --- CEO Visual --- */
-        .ceo-portrait {
-            border: 2px solid var(--accent-red);
+        /* --- CEO Portrait --- */
+        .ceo-frame {
+            border: 2px solid var(--ui-gold);
+            padding: 10px;
+            display: inline-block;
+            background: #000;
             position: relative;
-            max-width: 300px;
-            filter: grayscale(40%) contrast(120%);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
         }
 
-        /* --- Special Info Badges --- */
-        .division-tag {
-            font-size: 0.75rem;
-            background: #1a1a1a;
-            border: 1px solid var(--accent-blue);
-            color: var(--accent-blue);
-            padding: 3px 10px;
-            margin-right: 5px;
+        .ceo-img {
+            width: 280px;
+            filter: contrast(110%) brightness(95%);
+            border: 1px solid #444;
         }
 
-        .btn-baniar {
-            background: transparent;
-            border: 1px solid var(--accent-red);
-            color: white;
-            padding: 10px 30px;
-            transition: 0.4s;
+        .verified-stamp {
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            background: var(--ui-gold);
+            color: #000;
+            padding: 5px 15px;
+            font-weight: bold;
+            font-size: 0.8rem;
         }
 
-        .btn-baniar:hover {
-            background: var(--accent-red);
-            box-shadow: 0 0 20px var(--accent-red);
+        /* --- Action Items --- */
+        .project-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #222;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: 0.3s;
         }
 
-        footer { border-top: 1px solid #222; font-size: 0.8rem; padding: 30px 0; }
+        .project-item:hover {
+            border-color: var(--accent-red);
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        .drone-highlight {
+            color: var(--terminal-green);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+        }
+
+        footer {
+            border-top: 1px solid #333;
+            padding: 20px 0;
+            font-size: 0.8rem;
+            background: #000;
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" onclick="showSection('home')">BANIAR <span class="text-danger">GROUP</span></a>
+            <a class="navbar-brand fw-bold" onclick="render('home')"><span class="text-danger">BANIAR</span>_SYSTEMS</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-link" onclick="showSection('home')">HOME</li>
-                    <li class="nav-item"><a class="nav-link" onclick="showSection('ceo')">CEO PROFILE</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="showSection('defense')">DEFENSE</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="showSection('bio')">BIO-SCIENCE</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="showSection('logistics')">LOGISTICS</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="render('ceo')">COMMANDER</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="render('defense')">ARMAMENT</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="render('medical')">BIO-SCIENCE</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="render('logistics')">MARITIME</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div id="main-display" class="container">
-        <div id="content-area" class="w-100">
+    <main id="display-master" class="container">
+        <div id="dynamic-content">
             <div class="content-card text-center">
-                <h1 class="display-2 fw-bold">OUR BUSINESS IS <span class="text-danger">EVERYTHING</span></h1>
-                <p class="lead">Selamat datang di pusat komando Baniar Group. Kami adalah arsitek dari masa depan global.</p>
+                <h1 class="display-1 fw-bold">BANIAR <span class="text-danger">GROUP</span></h1>
+                <p class="lead text-secondary font-monospace">STATUS: SYSTEM SECURE | WAITING FOR INPUT...</p>
                 <div class="mt-4">
-                    <button class="btn btn-baniar" onclick="showSection('defense')">ENTER SYSTEM</button>
+                    <button class="btn btn-outline-danger px-5 py-3" onclick="render('defense')">ACCESS DATABASE</button>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <footer class="text-center text-secondary">
+    <footer class="text-center text-muted">
         <div class="container">
-            <p>ACCESS LEVEL: ADMIN | ENCRYPTED SESSION ID: BNR-2026-X</p>
-            <p>&copy; 2026 PT BANIAR GLOBAL INDUSTRI Tbk. - <span class="text-danger">Restricted Content</span></p>
+            <p>BANIAR GLOBAL INDUSTRIES &copy; 2026 | CLASSIFIED DOCUMENT | CEO: A.R.T.H</p>
         </div>
     </footer>
 
     <script>
-        const sections = {
+        const database = {
             home: `
                 <div class="content-card text-center">
-                    <h1 class="display-3 fw-bold">BANIAR <span class="text-danger">CORP</span></h1>
-                    <p class="lead">Solusi Terpadu: Senjata | Biologis | Kimia | Medis | Logistik Laut</p>
-                    <hr class="border-danger">
-                    <p>Membangun kedaulatan tanpa batas melalui inovasi radikal.</p>
+                    <h1 class="display-3">GLOBAL <span class="text-danger">DOMINANCE</span></h1>
+                    <p class="lead">Baniar Group mengintegrasikan kekuatan persenjataan canggih dengan riset evolusi biologis.</p>
+                    <hr class="border-secondary">
+                    <div class="row text-start mt-4">
+                        <div class="col-md-4"><h6>> PERSENJATAAN</h6><p class="small text-muted">Supremasi Udara Otonom.</p></div>
+                        <div class="col-md-4"><h6>> BIO-SCIENCE</h6><p class="small text-muted">Rekayasa Medis & Viral.</p></div>
+                        <div class="col-md-4"><h6>> LOGISTIK</h6><p class="small text-muted">Jaringan Bawah Laut Global.</p></div>
+                    </div>
                 </div>
             `,
             ceo: `
                 <div class="content-card">
                     <div class="row align-items-center">
                         <div class="col-md-5 text-center">
-                            <img src="ceo-alessandro.jpg" alt="CEO Alessandro" class="img-fluid ceo-portrait mb-4">
+                            <div class="ceo-frame">
+                                <img src="ceo-alessandro.jpg" alt="CEO" class="ceo-img">
+                                <div class="verified-stamp">IDENTITY VERIFIED</div>
+                            </div>
                         </div>
                         <div class="col-md-7">
-                            <h5 class="text-danger">SUPREME COMMANDER / CEO</h5>
-                            <h2 class="display-5 fw-bold">ALESSANDRO RYDEN TIMOTHY HUTAJULU</h2>
-                            <p class="text-info font-monospace">"Visi kami melampaui etika tradisional. Kami membangun apa yang dunia takutkan, untuk menjaga apa yang dunia cintai."</p>
-                            <p>Di bawah kepemimpinan Hutajulu, Baniar Group telah menjadi kekuatan militer swasta dan entitas riset biokimia paling dominan di belahan bumi timur.</p>
-                            <div class="mt-3">
-                                <span class="division-tag">LEVEL S CLEARANCE</span>
-                                <span class="division-tag">STRATEGIC ARCHITECT</span>
-                            </div>
+                            <h5 class="text-danger mb-1">CHIEF EXECUTIVE OFFICER</h5>
+                            <h2 class="display-5 fw-bold mb-3">ALESSANDRO RYDEN TIMOTHY HUTAJULU</h2>
+                            <p class="lead font-italic">"Dunia tidak membutuhkan janji politik, dunia membutuhkan solusi nyata dari sains dan kekuatan."</p>
+                            <p class="text-secondary">Sebagai pemegang otoritas tertinggi di Baniar Group, Hutajulu telah memimpin ekspansi masif ke 120 negara, menyatukan sektor pertahanan dan kesehatan dalam satu komando strategis tunggal.</p>
                         </div>
                     </div>
                 </div>
             `,
             defense: `
                 <div class="content-card">
-                    <h2 class="text-danger border-bottom pb-2">DEFENSE DIVISION: DRONE WARFARE</h2>
-                    <p class="lead mt-3">Sistem Pertahanan Udara Tanpa Awak Generasi Ke-6.</p>
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <h4>Bayraktar MIUS (Kızılelma)</h4>
-                            <p>Inti dari armada pertahanan Baniar. Pesawat tempur tak berawak supersonik dengan kemampuan AI otonom penuh. Dirancang untuk supremasi udara tanpa risiko nyawa manusia.</p>
-                            <ul>
-                                <li>Low-RCS (Stealth Capability)</li>
-                                <li>Autonomous Take-off & Landing</li>
-                                <li>Mach 1.2 Cruise Speed</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=500&q=80" class="img-fluid border border-secondary opacity-75">
-                        </div>
+                    <h2 class="text-danger border-bottom pb-2">DIVISI PERSENJATAAN & DRONE</h2>
+                    <div class="project-item mt-4">
+                        <h4 class="drone-highlight">BAYRAKTAR MIUS (Kızılelma)</h4>
+                        <p>Ujung tombak armada Baniar. Jet tempur tanpa awak berkemampuan AI otonom penuh. Dirancang untuk operasi tanpa terdeteksi radar dan memiliki kemampuan tempur udara-ke-udara yang melampaui refleks pilot manusia.</p>
+                    </div>
+                    <div class="project-item">
+                        <h4 class="text-warning">PROYEK WESTERLING</h4>
+                        <p>Jaringan suplai persenjataan global. Melalui Proyek Westerling, Baniar Group menjadi pemasok alutsista utama di berbagai belahan dunia, menjamin stabilitas wilayah di bawah kendali teknologi kita.</p>
                     </div>
                 </div>
             `,
-            bio: `
+            medical: `
                 <div class="content-card">
-                    <h2 class="text-danger border-bottom pb-2">BIO-CHEMICAL & MEDICAL</h2>
-                    <div class="row mt-4">
-                        <div class="col-md-8">
-                            <h4>Project Renaissance</h4>
-                            <p>Kami mempelajari kehidupan dari level molekuler. Divisi medis kami memproduksi obat-obatan regeneratif yang mampu menyembuhkan kerusakan jaringan dalam hitungan jam.</p>
-                            <p class="text-warning">Peringatan: Akses ke fasilitas riset Kimia & Biologis di bawah tanah memerlukan protokol dekontaminasi penuh.</p>
-                            <div class="alert alert-dark border-danger text-danger">
-                                STATUS: SANGAT RAHASIA - SUBYEK EVOLUSI TERPANTAU
+                    <h2 class="text-danger border-bottom pb-2">BIO-CHEMICAL & ADVANCED MEDICAL</h2>
+                    <p class="text-muted mb-4 font-monospace">DEPARTEMEN RISET: KESEHATAN & EVOLUSI</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="project-item">
+                                <h5 class="text-info">ERADIKASI HIV/AIDS</h5>
+                                <p class="small">Pengembangan serum retroviral yang mampu membersihkan virus dari sel inang secara permanen.</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                             <img src="https://images.unsplash.com/photo-1532187875605-1ef6c237ddc4?auto=format&fit=crop&w=400&q=80" class="img-fluid grayscale">
+                        <div class="col-md-6">
+                            <div class="project-item">
+                                <h5 class="text-info">ANTI-KANKER MOLEKULER</h5>
+                                <p class="small">Nanoteknologi yang menargetkan sel kanker secara spesifik tanpa merusak sel sehat.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="project-item">
+                                <h5 class="text-danger">PROYEK REGENERASI</h5>
+                                <p class="small">Penelitian jaringan biologis untuk mempercepat penyembuhan luka fatal dalam hitungan menit. (Status: Restricted).</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             `,
             logistics: `
                 <div class="content-card">
-                    <h2 class="text-info border-bottom pb-2">MARITIME LOGISTICS</h2>
-                    <p>Menguasai jalur perdagangan dunia. Armada logistik laut Baniar Group dilengkapi dengan teknologi *cloaking* sonar dan rute bawah laut terdalam.</p>
-                    <div class="p-3 border border-info mt-3 font-monospace">
-                        > TRACKING GLOBAL FLEET... <br>
-                        > 452 VESSELS ACTIVE <br>
-                        > STATUS: UNSTOPPABLE
+                    <h2 class="text-info border-bottom pb-2">MARITIME LOGISTICS DIVISION</h2>
+                    <p class="mt-3">Menguasai samudera adalah kunci menguasai dunia. Armada laut Baniar Group memastikan jalur distribusi kimia dan peralatan medis tetap berjalan tanpa gangguan pihak ketiga.</p>
+                    <div class="p-3 border border-secondary font-monospace mt-4" style="background: #000">
+                        > TRACKING MARITIME ASSETS... <br>
+                        > STATUS: UNSTOPPABLE <br>
+                        > DEEP SEA ROUTE: ACTIVE
                     </div>
                 </div>
             `
         };
 
-        function showSection(sectionId) {
-            const display = document.getElementById('content-area');
-            display.style.opacity = '0'; // Fade out
+        function render(sectionId) {
+            const container = document.getElementById('dynamic-content');
+            container.innerHTML = `<div class="text-center p-5"><div class="spinner-border text-danger" role="status"></div><br><small class="mt-2">LOADING DATA...</small></div>`;
             
             setTimeout(() => {
-                display.innerHTML = sections[sectionId];
-                display.style.opacity = '1'; // Fade in
-            }, 300);
+                container.innerHTML = database[sectionId];
+            }, 400);
         }
     </script>
 
